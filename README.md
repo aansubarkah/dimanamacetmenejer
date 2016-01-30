@@ -1,3 +1,3 @@
 # Macet-surabaya-manager-frontend
 
-This provide frontend for management view of Macet Surabaya Apps
+This provide frontend for manager view of dimanamacet.com
