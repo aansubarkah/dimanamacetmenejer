@@ -9,5 +9,5 @@
   "liveReload": false,/**on production, set false*/
   "watcher": "polling",
   "usePods": true,
-  "port": 4300
+  "port": 4400
 }
