@@ -8,8 +8,8 @@ var Router = Ember.Router.extend({
 
 Router.map(function () {
   this.route('login');
-  this.route('weathers');
-  this.route('weather');
+  //this.route('weathers');
+  //this.route('weather');
   this.route('markers');
   this.route('marker');
   this.route('categories');
