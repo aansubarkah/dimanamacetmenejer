@@ -14,12 +14,12 @@ Router.map(function () {
   this.route('marker');
   this.route('categories');
   this.route('category');
-  this.route('users');
-  this.route('user');
+  //this.route('users');
+  //this.route('user');
   this.route('respondents');
   this.route('respondent');
-  this.route('groups');
-  this.route('group');
+  //this.route('groups');
+  //this.route('group');
   this.route('places');
   this.route('place');
   this.route('journey');
@@ -28,7 +28,7 @@ Router.map(function () {
   this.route('markerview');
   this.route('loading');
   this.route('tojourney');
-  this.route('twitter');
+  //this.route('twitter');
 });
 
 export default Router;
