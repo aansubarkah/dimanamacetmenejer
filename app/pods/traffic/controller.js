@@ -175,8 +175,8 @@ export default Ember.Controller.extend({
 
 			marker.save().then(function () {
 				// @warn refresh template
-				//that.get('target.router').refresh();
-				that.transitionToRoute('traffic');
+				that.get('target.router').refresh();
+				//that.transitionToRoute('traffic');
 			});
 		},
 		deleteDatum: function (place) {

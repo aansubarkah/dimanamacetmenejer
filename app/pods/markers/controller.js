@@ -54,8 +54,8 @@ export default Ember.Controller.extend({
 			 });*///don't remove above line, for educational purpose
 			that.markersForDisplay.addObject({
 				id: hashids.encode(new Date().getTime()),
-				lat: e.latLng.G,
-				lng: e.latLng.K,
+				lat: e.latLng.lat(),
+				lng: e.latLng.lng(),
 				title: 'New Marker',
 				draggable: true,
 				infoWindow: {
@@ -64,13 +64,13 @@ export default Ember.Controller.extend({
 				},
 				click: function () {
 					that.toggleProperty('isShowingModal');
-					that.set('newLat', e.latLng.G);
-					that.set('newLng', e.latLng.K);
+					that.set('newLat', e.latLng.lat());
+					that.set('newLng', e.latLng.lng());
 				},
 				dragend: function (f) {
 					that.toggleProperty('isShowingModal');
-					that.set('newLat', f.latLng.G);
-					that.set('newLng', f.latLng.K);
+					that.set('newLat', f.latLng.lat());
+					that.set('newLng', f.latLng.lng());
 				}
 			});
 		},

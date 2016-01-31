@@ -1,6 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+    session: Ember.inject.service(),
 	init() {
 		this._super(...arguments);
 		this.set('isShowingModal', false);
@@ -11,7 +12,7 @@ export default Ember.Component.extend({
 		this.set('newRespondentName', '');
 		this.set('newRespondentContact', '');
 		this.set('category_id', 1);
-		this.set('respondent_id', 0);
+		this.set('respondent_id', 11);// Suara Surabaya
 		this.set('weather_id', 1);
 		//this.set('lat', 0);
 		//this.set('lng', 0);
@@ -74,12 +75,21 @@ export default Ember.Component.extend({
 				return;
 			}
 
+            //console.info(this.get('respondent_id'));
+            //console.info(this.get('session.session.content.authenticated.token'));
+            var arr_token = this.get('session.session.content.authenticated.token').split('.');
+            var user_id = decodeURIComponent(escape(window.atob(arr_token[1])));
+            //var user_id = this.get('session.session');
+            var arr_user = JSON.parse(user_id);
+            //console.log(arr_user['id']);
+
 			var pinned = 0;
 			if (this.get('newPinned')) {
 				pinned = 1;
 			}
 
 			var dataToSave = {
+                user_id: parseInt(arr_user['id']),
 				category_id: parseInt(this.get('category_id')),
 				respondent_id: parseInt(this.get('respondent_id')),
 				respondentName: this.get('newRespondentName'),
