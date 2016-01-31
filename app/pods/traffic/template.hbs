@@ -1,18 +1,21 @@
 <style>
-    .ember-cli-g-map {
-        height: 450px;
-    }
+.ember-cli-g-map {
+    height: 450px;
+}
 </style>
 <div class="row">
     <div class="col-md-8">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Traffic</h3>
-
-                <div class="box-tools">
-                    <div class="input-group">
-                        {{gmap-search refreshPlace='refreshPlace' elementId='searchPlaceText'}}
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <div class="col-md-4 pull-left">
+                    <h3 class="box-title">Traffic</h3>
+                </div>
+                <div class="col-md-4 pull-right">
+                    <div class="box-tools">
+                        <div class="input-group">
+                            {{gmap-search refreshPlace='refreshPlace' elementId='searchPlaceText'}}
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -21,6 +24,9 @@
             </div>
             <div class="box-footer clearfix">
                 <div class="box-tools">
+                    <div class="pull-left">
+                        Post today:&nbsp;<strong>{{postToday}}</strong>&nbsp;Total posts:&nbsp;<strong>{{postByUser}}</strong>
+                    </div>
                     <div class="form-group pull-right">
                         {{select-picker value=lastminutes
                         content=times
@@ -45,15 +51,15 @@
             <div class="box-body">
                 <table class="table table-striped">
                     <thead>
-                    <tr>
-                        <th>#</th>
-                        <th></th>
-                    </tr>
+                        <tr>
+                            <th>#</th>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    {{#each markerview as |markerview index|}}
+                        {{#each markerview as |markerview index|}}
                         {{markerview-item editDatum='editDatum' deleteDatum='deleteDatum' index=index firstRowNumber=firstRowNumber markerview=markerview refreshPlace='refreshPlace'}}
-                    {{/each}}
+                        {{/each}}
                     </tbody>
                 </table>
             </div>

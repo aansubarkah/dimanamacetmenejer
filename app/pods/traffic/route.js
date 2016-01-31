@@ -38,6 +38,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 	},
 	setupController: function (controller, model) {
 		controller.set('total', model.markerview.get('meta.total'));
+        controller.set('postByUser', model.markerview.get('meta.postByUser'));
+        controller.set('postToday', model.markerview.get('meta.postToday'));
 		controller.set('markerview', model.markerview);
 		var markerviews = [];
 		controller.set('markerviews', markerviews);

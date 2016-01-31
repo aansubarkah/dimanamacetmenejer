@@ -14,6 +14,8 @@ export default Ember.Controller.extend({
 	query: '',
 	lastminutes: 30,
 	total: null,
+    postByUser: null,
+    postToday: null,
 	totalPages: function () {
 		return Math.ceil(this.get('total') / this.limit);
 	}.property('total'),

@@ -1,18 +1,21 @@
 <style>
-    .ember-cli-g-map {
-        height: 450px;
-    }
+.ember-cli-g-map {
+    height: 450px;
+}
 </style>
 <div class="row">
     <div class="col-md-8">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Direction</h3>
-
-                <div class="box-tools">
-                    <div class="input-group">
-                        {{gmap-search refreshPlace='refreshPlace' elementId='searchPlaceText'}}
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <div class="col-md-4 pull-left">
+                    <h3 class="box-title">Direction</h3>
+                </div>
+                <div class="col-md-4 pull-right">
+                    <div class="box-tools">
+                        <div class="input-group">
+                            {{gmap-search refreshPlace='refreshPlace' elementId='searchPlaceText'}}
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -29,37 +32,37 @@
             <div class="box-body">
                 <table class="table table-striped">
                     <thead>
-                    <tr>
-                        <th></th>
-                    </tr>
+                        <tr>
+                            <th></th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>
-                            <div class="form-group">
-                                {{select-picker value=lastminutes
-                                content=times
-                                optionLabelPath="content.label"
-                                optionValuePath="content.value"
-                                nothingSelectedMessage="Traffic about 30 minutes ago"}}
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>{{gmap-place placeCoordinate='getOriginCoordinate' elementId='searchOriginText' placeholder='Origin, blank mean your location'}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{gmap-place placeCoordinate='getDestinationCoordinate' elementId='searchDestinationText' placeholder='Destination'}}</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            {{#if isUsed}}
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    {{select-picker value=lastminutes
+                                    content=times
+                                    optionLabelPath="content.label"
+                                    optionValuePath="content.value"
+                                    nothingSelectedMessage="Traffic about 30 minutes ago"}}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{{gmap-place placeCoordinate='getOriginCoordinate' elementId='searchOriginText' placeholder='Origin, blank mean your location'}}</td>
+                        </tr>
+                        <tr>
+                            <td>{{gmap-place placeCoordinate='getDestinationCoordinate' elementId='searchDestinationText' placeholder='Destination'}}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                {{#if isUsed}}
                                 {{#hold-button type="rectangle" action="toJourney" delay=10}}Get Direction Again{{/hold-button}}
-                            {{else}}
+                                {{else}}
                                 {{#hold-button type="rectangle" action="getRoute" delay=10}}Direction{{/hold-button}}
-                            {{/if}}
-                        </td>
-                    </tr>
+                                {{/if}}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
