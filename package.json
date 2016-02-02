@@ -49,6 +49,7 @@
     "ember-simple-auth": "1.0.1",
     "ember-simple-auth-token": "1.0.0",
     "ember-validations": "2.0.0-alpha.4",
+    "emberx-select": "2.0.2",
     "pagination-pager": "2.1.1"
   },
   "dependencies": {}

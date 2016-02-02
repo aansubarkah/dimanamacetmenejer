@@ -50,14 +50,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		var markers = [];
 		controller.set('markers', markers);
 		controller.set('category', model.category);
-		var categories = [];
-		controller.set('categories', categories);
 		controller.set('weather', model.weather);
-		var weathers = [];
-		controller.set('weathers', weathers);
 		controller.set('respondent', model.respondent);
-		var respondents = [];
-		controller.set('respondents', respondents);
 
 		// ---------------------------------------------------------
 		// ------------- create markers to display on maps ---------

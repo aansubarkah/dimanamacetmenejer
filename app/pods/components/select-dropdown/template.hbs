@@ -1,0 +1,6 @@
+{{#x-select value=selectedValue}}
+{{#x-option value=selectedValue}}{{defaultText}}{{/x-option}}
+{{#each data as |datum|}}
+{{#x-option value=datum.id}}{{datum.name}}{{/x-option}}
+{{/each}}
+{{/x-select}}
