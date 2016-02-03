@@ -1,4 +1,4 @@
-{{#x-select value=selectedValue}}
+{{#x-select value=selectedValue class='form-control'}}
 {{#x-option value=selectedValue}}{{defaultText}}{{/x-option}}
 {{#each data as |datum|}}
 {{#x-option value=datum.id}}{{datum.name}}{{/x-option}}
