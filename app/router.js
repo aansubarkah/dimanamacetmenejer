@@ -29,6 +29,7 @@ Router.map(function () {
   this.route('loading');
   this.route('tojourney');
   this.route('twitter');
+  this.route('passreset');
 });
 
 export default Router;

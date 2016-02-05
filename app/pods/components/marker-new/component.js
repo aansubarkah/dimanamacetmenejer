@@ -21,7 +21,7 @@ export default Ember.Component.extend({
     actions: {
         toggleAddModal(){
             this.toggleProperty('isShowingModal');
-            console.log(this.get('category_id'));
+            //console.log(this.get('category_id'));
             //console.log(this.get('category'));
         },
         toggleAlert(){
