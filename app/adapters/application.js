@@ -20,6 +20,12 @@ export default DS.RESTAdapter.extend(DataAdapterMixin, {
         return false;
     },
     host: config.apiURL,
+    /*handleResponse: function(status, headers, payload){
+        if(status === 400 && payload.errors){
+            return new DS.InvalidError(payload.errors);
+        }
+        return this._super(...arguments);
+    }*/
     /*ajax: function (url, method, hash) {
       hash = hash || {};
       hash.crossDomain = true;
@@ -27,23 +33,23 @@ export default DS.RESTAdapter.extend(DataAdapterMixin, {
       return this._super(url, method, hash);
       }*/
     /*handleResponse: function (status) {
-        if (status === 401) {
-            if (this.get('session.isAuthenticated')) {
-                this.get('session').invalidate();
-            }
-        }
+      if (status === 401) {
+      if (this.get('session.isAuthenticated')) {
+      this.get('session').invalidate();
+      }
+      }
 
-        return this._super(...arguments);
-    },
-    ajaxError: function(jqXHR) {
-        // if 401, ESA needs to invalidate
-        if (jqXHR && jqXHR.status === 401) {
-            if (this.get('session.isAuthenticated')) {
+      return this._super(...arguments);
+      },
+ajaxError: function(jqXHR) {
+                // if 401, ESA needs to invalidate
+                if (jqXHR && jqXHR.status === 401) {
+                if (this.get('session.isAuthenticated')) {
                 this.get('session').invalidate();
-            }
-            return true;
-        } else {
-            return this._super.apply(this, arguments);
-        }
-    }*/
+                }
+                return true;
+                } else {
+                return this._super.apply(this, arguments);
+                }
+                }*/
 });

@@ -3,20 +3,55 @@
         <h3 class="box-title">Change Password</h3>
     </div>
     <div class="box-body">
+        {{#if isAlert}}
+        <div class="alert {{alertClass}} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{alertMessages}}
+        </div>
+        {{/if}}
         <table class="table table-striped">
             <tbody>
                 <tr>
-                    <td>Old Password</td>
+                    <td>
+                        <div class="form-group">
+                            {{input
+                            type='password'
+                            value=oldPassword
+                            class='form-control'
+                            placeholder='Old Password'
+                            }}
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td>New Password</td>
+                    <td>
+                        <div class="form-group">
+                            {{input
+                            type='password'
+                            value=newPassword
+                            class='form-control'
+                            placeholder='New Password'
+                            }}
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <td>New Password (confirmation)</td>
+                    <td>
+                        <div class="form-group">
+                            {{input
+                            type='password'
+                            value=confirmPassword
+                            class='form-control'
+                            placeholder='New Password (Confirmation)'
+                            enter='changePassword'
+                            }}
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="box-footer clearfix">
+        {{#hold-button type="rectangle" action="changePassword" delay=1}}Save{{/hold-button}}
     </div>
 </div>

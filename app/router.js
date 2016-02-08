@@ -30,6 +30,7 @@ Router.map(function () {
   this.route('tojourney');
   this.route('twitter');
   this.route('passreset');
+  this.route('contacts');
 });
 
 export default Router;

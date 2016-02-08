@@ -1,22 +1,24 @@
 <style>
-    .ember-cli-g-map {
-        height: 450px;
-    }
+.ember-cli-g-map {
+    height: 450px;
+}
 </style>
 <div class="box">
     <div class="box-header">
-        <h3 class="box-title">Traffic Map&nbsp;</h3>
-
-        {{select-picker value=lastminutes
-        content=times
-        optionLabelPath="content.label"
-        optionValuePath="content.value"
-        nothingSelectedMessage="Traffic about 30 minutes ago"}}
-
-        <div class="box-tools">
-            <div class="input-group">
-                {{#gmap-search refreshPlace='refreshPlace' elementId='searchPlaceText'}}{{/gmap-search}}
-                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <div class="col-md-3 pull-left">
+            <h3 class="box-title">Traffic Map&nbsp;</h3>
+            {{select-picker value=lastminutes
+            content=times
+            optionLabelPath="content.label"
+            optionValuePath="content.value"
+            nothingSelectedMessage="Traffic about 30 minutes ago"}}
+        </div>
+        <div class="col-md-5 pull-right">
+            <div class="box-tools">
+                <div class="input-group">
+                    {{#gmap-search refreshPlace='refreshPlace' elementId='searchPlaceText'}}{{/gmap-search}}
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                </div>
             </div>
         </div>
     </div>
