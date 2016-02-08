@@ -31,6 +31,9 @@ Router.map(function () {
   this.route('twitter');
   this.route('passreset');
   this.route('contacts');
+  this.route('stats');
+  this.route('activity');
+  this.route('activities');
 });
 
 export default Router;

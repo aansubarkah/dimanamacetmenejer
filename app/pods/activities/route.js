@@ -8,10 +8,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         var arr_user = JSON.parse(userId);
 
         return Ember.RSVP.hash({
-            user: this.store.find('user', parseInt(arr_user['id']))
+            activity: this.store.find('activity', parseInt(arr_user['id']))
         });
     },
     setupController: function(controller, model) {
-        controller.set('user', model.user);
+        controller.set('activity', model.activity);
     }
 });
