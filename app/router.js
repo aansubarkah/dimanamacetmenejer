@@ -34,6 +34,7 @@ Router.map(function () {
   this.route('stats');
   this.route('activity');
   this.route('activities');
+  this.route('sources');
 });
 
 export default Router;

@@ -1,0 +1,66 @@
+<style>
+/* following line is for autocomplete list */
+.message {
+    z-index: 999;
+    background-color: #ffffff;
+}
+
+    .tt-suggestion {
+        z-index: 999;
+        background-color: #ffffff;
+    }
+
+    .tt-suggestion .tt-cursor {
+        z-index: 999;
+        background-color: #3C8DBC;
+    }
+</style>
+{{#if isShowingModal}}
+{{#modal-dialog close="toggleAddModal"
+alignment="center"
+translucentOverlay=true
+clickOutsideToClose=true
+container-class="modal-dialog"}}
+<div class="modal-header">
+    <h4 class="modal-title">New Place + Traffic Report</h4>
+    {{#if isAlert}}
+    <div class="alert alert-info" role="alert">
+        {{alertMessages}}
+    </div>
+    {{/if}}
+</div>
+<div class="modal-body">
+    <div class="form-group">
+        Respondent: <strong>@{{newSource.twitUserScreenName}}</strong>
+    </div>
+    <div class="form-group">
+        {{select-dropdown data=categories selectedValue=category_id defaultText='Condition: Macet'}}
+    </div>
+    <div class="form-group">
+        {{select-dropdown data=weathers selectedValue=weather_id defaultText='Weather: Cerah'}}
+    </div>
+    <div class="form-group">
+        {{input
+        class="form-control"
+        placeholder="Place name"
+        value=placeName
+        enter="createNew"
+        }}
+    </div>
+    <div class="form-group">
+        {{textarea
+        class='form-control'
+        placeholder="Reason/More info here (optional)"
+        value=newSource.info
+        enter="createNew"
+        }}
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" {{action 'toggleAddModal'}}>Close
+    </button>
+    <button type="button" class="btn btn-info" {{action 'createNew'}}>Save
+    </button>
+</div>
+{{/modal-dialog}}
+{{/if}}

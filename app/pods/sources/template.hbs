@@ -1,0 +1,81 @@
+<style>
+.ember-cli-g-map {
+    height: 450px;
+}
+</style>
+<div class="row">
+    <div class="col-md-8">
+        <div class="box">
+            <div class="box-header">
+                <div class="col-md-1 pull-left">
+                    <h3 class="box-title">Timeline</h3>
+                </div>
+                <div class="col-md-7 pull-right">
+                    <div class="box-tools">
+                        <div class="input-group">
+                            {{gmap-search refreshPlace='refreshPlace' elementId='searchPlaceText'}}
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                {{#if isShowingMap}}
+                    {{g-maps name="traffic-map" lat=lat lng=lng zoom=zoom click="clickAction" markers=placesForDisplay}}
+                {{else}}
+                    {{source-help}}
+                {{/if}}
+            </div>
+            <div class="box-footer clearfix">
+                <div class="box-tools">
+                    <div class="pull-left">
+                        Post(s) today:&nbsp;<strong>{{postToday}}</strong>&nbsp;Total post(s):&nbsp;<strong>{{postByUser}}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-tools">
+                    <div class="input-group">
+                        {{input type="text" classNames="form-control" placeholder="Search Twitter" value=query}}
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each sources as |source index|}}
+                        {{source-item editDatum='editDatum' deleteDatum='deleteDatum' index=index firstRowNumber=firstRowNumber source=source addSourceToCache='addSourceToCache'}}
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="box-footer clearfix">
+                <p class="pull-left">Displaying row {{firstRowNumber}} to {{lastRowNumber}} from {{total}} rows</p>
+
+                <div class="box-tools">
+                    {{pagination-pager count=totalPages current=page}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{marker-place-new
+isShowingModal=isShowingModal
+newLat=newLat
+newLng=newLng
+categories=categories
+weathers=weathers
+newSource=newSource
+createNew="createNew"
+}}

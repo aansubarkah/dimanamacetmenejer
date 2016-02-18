@@ -65,6 +65,8 @@ module.exports = function (defaults) {
 	// Hashids
 	app.import('bower_components/hashids/lib/hashids.min.js');
 
+    // bignumber.js
+    app.import('bower_components/bignumber.js/bignumber.min.js');
 	// Google Maps API
 	//app.import('vendor/gmaps.js');
 

@@ -24,7 +24,7 @@ export default DS.Model.extend({
     created: DS.attr('string'),
     modified: DS.attr('string'),
     info: DS.attr('string'),
-    twitID: DS.attr('number', {defaultValue: null}),
+    twitID: DS.attr('string', {defaultValue: null}),
     twitPlaceID: DS.attr('string', {defaultValue: null}),
     twitTime: DS.attr('string', {defaultValue: null}),
     twitURL: DS.attr('string', {defaultValue: null}),

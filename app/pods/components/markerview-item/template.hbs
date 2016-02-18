@@ -1,17 +1,10 @@
 <td>{{basic-math index "+" firstRowNumber}}</td>
 <td>
     <span {{action 'refreshPlace' on='click'}}>
-        <strong>{{markerview.category_name}}</strong>&nbsp;di&nbsp;<strong>{{markerview.place_name}}</strong>
-        &nbsp;karena&nbsp;{{markerview.info}}&nbsp;&nbsp;pada&nbsp;<strong>{{format-date markerview.created}}</strong>
+        <strong>{{markerview.category_name}}</strong>&nbsp;di&nbsp;{{markerview.info}}&nbsp;&nbsp;pada&nbsp;
+        <strong>{{format-date markerview.created}}</strong>
         &nbsp;({{format-time markerview.created}}).&nbsp;Informasi oleh
         &nbsp;<strong>{{markerview.respondent_name}}</strong>
         &nbsp;melalui&nbsp;<strong>{{markerview.respondent_contact}}</strong>.
-        &nbsp;Kejadian&nbsp;ini&nbsp;<strong>
-        {{#if markerview.cleared}}
-            sudah selesai pada&nbsp;{{format-date markerview.modifed}}
-        {{else}}
-            belum selesai
-        {{/if}}
-    </strong>.
     </span>
 </td>

@@ -1,0 +1,10 @@
+<td>{{basic-math index "+" firstRowNumber}}</td>
+<td>
+    <span {{action 'addSourceToCache' on='click'}}>
+        <strong>@{{source.twitUserScreenName}}</strong>
+        {{source.info}}&nbsp;&nbsp;pada
+        <strong>{{format-date source.twitTime}}</strong>
+        &nbsp;({{format-time source.twitTime}}).
+    </span>
+    {{#hold-button type="rectangle" action="remove" delay=10}}Remove{{/hold-button}}
+</td>
