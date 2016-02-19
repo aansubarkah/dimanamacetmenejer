@@ -21,7 +21,7 @@
             </div>
             <div class="box-body">
                 {{#if isShowingMap}}
-                    {{g-maps name="traffic-map" lat=lat lng=lng zoom=zoom click="clickAction" markers=placesForDisplay}}
+                    {{g-maps name="source-map" lat=lat lng=lng zoom=zoom click="clickAction" markers=placesForDisplay}}
                 {{else}}
                     {{source-help}}
                 {{/if}}

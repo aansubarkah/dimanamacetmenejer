@@ -28,7 +28,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             weathers: this.store.findAll('weather'),
             categories: this.store.findAll('category'),
             markers: this.store.findAll('marker'),
-            places: this.store.findAll('place'),
+            //places: this.store.findAll('place'),
+            places: this.store.query('place', { limit: 10000}),
             sources: this.store.query('source', query)
         });
     },
@@ -46,6 +47,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		// ---------------------------------------------------------
 		var placesForDisplay = [];
 		model.places.forEach(function (item) {
+            var that = this;
 			var result = {
 				id: hashids.encode(item.get('id')),
 				lat: item.get('lat'),
@@ -53,11 +55,39 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 				infoWindow: {
 					content: "<p><strong>" + item.get('name') + "</strong></p>",
 					visible: false
-				}
+				},
+                //dblclick: 'toggleAdd'
+                dblclick: function(event, marker) {
+                    //console.log(Ember.controller);
+                    //Ember.
+                    //this.send('toggleAdd');
+                    //console.log(then);
+                    //var that
+                    //console.log(that.controller.set('isShowingModal', true));
+                    console.log(marker.get('lat'));
+                    //toggleAdd();
+                    //toggleCreateNewMarker();
+                    //@todo this function access parent function on controller
+                    //console.log(that);
+                    //console.log(event);
+                    //that.
+                    //toggleCreateNewMarker(marker);
+                    //that.controller.set('isShowingMap', true);
+                }
 			};
 			placesForDisplay.push(result);
 		});
 		controller.set('placesForDisplay', placesForDisplay);
+
+        /*controller.setProperties({
+            selections: {
+                markerOptions: {
+                    dblclick: function(event, marker) {
+                        console.log('halo');
+                    }
+                }
+            }
+        });*/
     },
 	queryParams: {
 		page: {

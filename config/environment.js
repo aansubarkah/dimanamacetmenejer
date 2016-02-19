@@ -36,7 +36,7 @@ module.exports = function (environment) {
 		},
 
 		googleMap: {
-			libraries: ['places', 'geometry'],
+			libraries: ['places', 'geometry', 'marker'],
 			apiKey: 'AIzaSyA7dciHJOSiR8annWOSISIdKFF6T3cuyMQ'
 		}
 	};
