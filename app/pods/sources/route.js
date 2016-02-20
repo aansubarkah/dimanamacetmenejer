@@ -56,23 +56,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 					content: "<p><strong>" + item.get('name') + "</strong></p>",
 					visible: false
 				},
-                //dblclick: 'toggleAdd'
-                dblclick: function(event, marker) {
-                    //console.log(Ember.controller);
-                    //Ember.
-                    //this.send('toggleAdd');
-                    //console.log(then);
-                    //var that
-                    //console.log(that.controller.set('isShowingModal', true));
-                    console.log(marker.get('lat'));
-                    //toggleAdd();
-                    //toggleCreateNewMarker();
-                    //@todo this function access parent function on controller
-                    //console.log(that);
-                    //console.log(event);
-                    //that.
-                    //toggleCreateNewMarker(marker);
-                    //that.controller.set('isShowingMap', true);
+                dblclick: function(event, marker, placeName = item.get('name')) {
+                    var controller = DimanamacetMiminFrontend.__container__.lookup("controller:sources");
+                    var boundSend = controller.send.bind(controller);
+                    boundSend('toggleCreateNewMarkerWithPlace', marker, placeName);
+                    //boundSend('toggleCreateNewMarker', marker);
+                    //console.log(marker.get('lat'));
                 }
 			};
 			placesForDisplay.push(result);

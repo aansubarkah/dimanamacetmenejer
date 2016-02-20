@@ -85,10 +85,17 @@ export default Ember.Controller.extend({
             });
         },
         toggleCreateNewMarker: function (place) {
-            //console.log(place);
             this.toggleProperty('isShowingModal');
             this.set('newLat', place.get('lat'));
             this.set('newLng', place.get('lng'));
+        },
+        toggleCreateNewMarkerWithPlace: function(place, placeName) {
+            this.toggleProperty('isShowingModal');
+            this.set('newLat', place.get('lat'));
+            this.set('newLng', place.get('lng'));
+            this.set('newPlaceName', placeName);
+            console.log(placeName);
+            console.log(place.get('lat'));
         },
         // create new marker
         createNew: function (dataToSave) {
