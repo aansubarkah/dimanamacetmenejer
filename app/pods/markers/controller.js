@@ -162,10 +162,3 @@ export default Ember.Controller.extend({
 		}
 	}
 });
-/*
- *
- Jalan Wonokitri Besar No.40-C
- Kecamatan Sawahan, Kota Surabaya, Jawa Timur 60256
- -7.290293, 112.727226
- API:AIzaSyA7dciHJOSiR8annWOSISIdKFF6T3cuyMQ
- */

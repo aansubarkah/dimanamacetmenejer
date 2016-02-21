@@ -9,6 +9,11 @@ export default Ember.Component.extend({
 		this._super(...arguments);
 		this.set('isEditing', false);
 		this.set('isShowingModal', false);
+        this.set('isMediaExist', false);
+
+        if (this.get('source.media') !== null) {
+            this.set('isMediaExist', true);
+        }
 	},
 	actions: {
 		remove(){
@@ -35,6 +40,10 @@ export default Ember.Component.extend({
 			var source = this.get('source');
 			this.sendAction('toggleCreateNewMarker', source);
 		},
+        togglePicture() {
+            //var pictureURL = this.get('source.media');
+            this.sendAction('togglePicture', this.get('source'));
+        },
 		cancel(){
 			this.set('isEditing', false);
 		},

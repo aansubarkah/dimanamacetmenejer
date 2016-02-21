@@ -39,10 +39,13 @@ export default Ember.Controller.extend({
     isPlaceNameExist: false,
     newSource: null,
     respondentNameCache: '',
+    respondentsOptionsSelected: 'Respondents',
     zoom: 16,
+    pictureURL: '',
     isAddRowVisible: false,
     isShowingModal: false,
     isShowingMap: false,
+    isShowingModalPicture: false,
     triggerSuggestions: 1,
     init: function () {
         var that = this;
@@ -59,6 +62,10 @@ export default Ember.Controller.extend({
     actions: {
         toggleAdd: function () {
             this.toggleProperty('isAddRowVisible');
+        },
+        togglePicture: function(source) {
+            this.toggleProperty('isShowingModalPicture');
+            this.set('pictureURL', source);
         },
         // when map is clicked, add marker
         clickAction: function (e) {
@@ -97,8 +104,6 @@ export default Ember.Controller.extend({
             this.set('newLng', place.get('lng'));
             this.set('isPlaceNameExist', true);
             this.set('newPlaceName', placeName);
-            //console.log(placeName);
-            //console.log(place.get('lat'));
         },
         // create new marker
         createNew: function (dataToSave) {
@@ -107,13 +112,12 @@ export default Ember.Controller.extend({
 
             var marker = store.createRecord('marker', dataToSave);
 
-            // @todo clear text field
             this.set('isShowingModal', false);
 
             marker.save().then(function () {
                 // @warn refresh template
-                that.get('target.router').refresh();
-                //that.transitionToRoute('sources');
+                //that.get('target.router').refresh();
+                that.transitionToRoute('traffic');
                 that.set('isShowingMap', false);
             });
         },

@@ -21,9 +21,9 @@
             </div>
             <div class="box-body">
                 {{#if isShowingMap}}
-                    {{g-maps name="source-map" lat=lat lng=lng zoom=zoom click="clickAction" markers=placesForDisplay}}
+                {{g-maps name="source-map" lat=lat lng=lng zoom=zoom click="clickAction" markers=placesForDisplay}}
                 {{else}}
-                    {{source-help}}
+                {{source-help}}
                 {{/if}}
             </div>
             <div class="box-footer clearfix">
@@ -46,16 +46,36 @@
                 </div>
             </div>
             <div class="box-body">
+                <div class="box-footer clearfix">
+                    <div class="box-tools">
+                        <div class="form-group pull-right">
+                            {{select-picker value=respondentID
+                            content=respondentsOptions
+                            optionLabelPath="content.label"
+                            optionValuePath="content.value"
+                            nothingSelectedMessage=respondentsOptionsSelected}}
+                        </div>
+                    </div>
+                </div>
                 <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th></th>
+                            <th><strong>{{respondentsOptionsSelected}}</strong></th>
                         </tr>
                     </thead>
                     <tbody>
                         {{#each sources as |source index|}}
-                        {{source-item editDatum='editDatum' deleteDatum='deleteDatum' index=index firstRowNumber=firstRowNumber source=source addSourceToCache='addSourceToCache'}}
+                        {{source-item 
+                        editDatum='editDatum'
+                        deleteDatum='deleteDatum'
+                        index=index
+                        firstRowNumber=firstRowNumber
+                        source=source
+                        addSourceToCache='addSourceToCache'
+                        isShowingModalPicture=isShowingModalPicture
+                        togglePicture='togglePicture'
+                        }}
                         {{/each}}
                     </tbody>
                 </table>
@@ -80,4 +100,8 @@ categories=categories
 weathers=weathers
 newSource=newSource
 createNew="createNew"
+}}
+{{source-item-picture
+isShowingModalPicture=isShowingModalPicture
+pictureURL=pictureURL
 }}

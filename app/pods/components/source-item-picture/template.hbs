@@ -1,0 +1,22 @@
+{{#if isShowingModalPicture}}
+{{#modal-dialog close="togglePicture"
+alignment="center"
+translucentOverlay=true
+clickOutsideToClose=true
+container-class="modal-dialog"}}
+<div class="modal-header">
+    <h4 class="modal-title">Pictures</h4>
+</div>
+<div class="modal-body">
+    <p>
+    <strong>@{{pictureURL.twitUserScreenName}}</strong>
+    {{pictureURL.info}}
+    </p>
+    <center><img src={{pictureURL.media}} height="80%" width="80%"></center>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" {{action 'togglePicture'}}>Close
+    </button>
+</div>
+{{/modal-dialog}}
+{{/if}}

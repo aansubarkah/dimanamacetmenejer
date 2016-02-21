@@ -26,6 +26,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		if (Ember.isPresent(params.lastminutes)) {
 			query.lastminutes = params.lastminutes;
 		}
+        if (Ember.isPresent(params.respondentID)) {
+			query.lastminutes = params.respondentID;
+		}
+
 
 		return Ember.RSVP.hash({
 			markerview: this.store.query('markerview', query),
@@ -102,6 +106,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		},
 		lastminutes: {
 			refreshModel: true
+		},
+		respondentID: {
+			refreshModel: true
 		}
+
 	}
 });

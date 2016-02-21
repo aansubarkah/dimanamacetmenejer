@@ -2,9 +2,12 @@
 <td>
     <span {{action 'addSourceToCache' on='click'}}>
         <strong>@{{source.twitUserScreenName}}</strong>
-        {{source.info}}&nbsp;&nbsp;pada
+        {{source.info}}&nbsp;
         <strong>{{format-date source.twitTime}}</strong>
         &nbsp;({{format-time source.twitTime}}).
     </span>
+    {{#if isMediaExist}}
+    {{#hold-button type="rectangle" action="togglePicture" delay=10}}Picture{{/hold-button}}
+    {{/if}}
     {{#hold-button type="rectangle" action="remove" delay=10}}Remove{{/hold-button}}
 </td>
