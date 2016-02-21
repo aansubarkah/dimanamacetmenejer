@@ -33,12 +33,20 @@ container-class="modal-dialog"}}
     <div class="form-group">
         Respondent: <strong>@{{newSource.twitUserScreenName}}</strong>
     </div>
+
+    {{#if isPlaceNameExist}}
+    <div class="form-group">
+        Place: <strong>{{placeName}}</strong>
+    </div>
+    {{/if}}
+
     <div class="form-group">
         {{select-dropdown data=categories selectedValue=category_id defaultText='Condition: Macet'}}
     </div>
     <div class="form-group">
         {{select-dropdown data=weathers selectedValue=weather_id defaultText='Weather: Cerah'}}
     </div>
+    {{#unless isPlaceNameExist}}
     <div class="form-group">
         {{input
         class="form-control"
@@ -47,6 +55,7 @@ container-class="modal-dialog"}}
         enter="createNew"
         }}
     </div>
+    {{/unless}}
     <div class="form-group">
         {{textarea
         class='form-control'

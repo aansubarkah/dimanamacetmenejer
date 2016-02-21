@@ -33,13 +33,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			marker: this.store.findAll('marker'),
 			category: this.store.findAll('category'),
 			weather: this.store.findAll('weather'),
-			respondent: this.store.findAll('respondent')
+			respondent: this.store.findAll('respondent'),
+            activity: this.store.query('activity', {})
 		});
 	},
 	setupController: function (controller, model) {
 		controller.set('total', model.markerview.get('meta.total'));
-        controller.set('postByUser', model.markerview.get('meta.postByUser'));
-        controller.set('postToday', model.markerview.get('meta.postToday'));
+        controller.set('postByUser', model.activity.get('meta.total'));
+        controller.set('postToday', model.activity.get('meta.totalToday'));
 		controller.set('markerview', model.markerview);
 		var markerviews = [];
 		controller.set('markerviews', markerviews);

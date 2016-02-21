@@ -1,7 +1,11 @@
 <td>{{basic-math index "+" firstRowNumber}}</td>
 <td>
     <span {{action 'refreshPlace' on='click'}}>
-        <strong>{{markerview.category_name}}</strong>&nbsp;di&nbsp;{{markerview.info}}&nbsp;&nbsp;pada&nbsp;
+        <strong>{{markerview.category_name}}</strong>&nbsp;
+        {{#if markerview.isPlaceNameExist}}
+        di&nbsp;{{markerview.place_name}}&nbsp;
+        {{/if}}
+        {{markerview.info}}&nbsp;&nbsp;pada&nbsp;
         <strong>{{format-date markerview.created}}</strong>
         &nbsp;({{format-time markerview.created}}).&nbsp;Informasi oleh
         &nbsp;<strong>{{markerview.respondent_name}}</strong>

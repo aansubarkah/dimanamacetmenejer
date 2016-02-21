@@ -18,10 +18,25 @@ export default Ember.Component.extend({
         this.set('info', '');
         this.set('placeName', '');
         this.set('selection', null);
+        //this.set('isPlaceNameExist', false);
     },
+    /*didRender() {
+    //didInsertElement() {
+    //didReceiveAttrs() {
+        this._super(...arguments);
+        if (this.get('placeName') !== '') {
+            this.set('isPlaceNameExist', true);
+        }
+    },*/
+    /*willDestroyElement() {
+        this._super(...arguments);
+        this.set('placeName', '');
+    },*/
     actions: {
         toggleAddModal(){
             this.toggleProperty('isShowingModal');
+            this.set('isPlaceNameExist', false);
+            this.set('placeName', '');
         },
         toggleAlert(){
             this.toggleProperty('isAlert');

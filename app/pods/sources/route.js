@@ -30,7 +30,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             markers: this.store.findAll('marker'),
             //places: this.store.findAll('place'),
             places: this.store.query('place', { limit: 10000}),
-            sources: this.store.query('source', query)
+            sources: this.store.query('source', query),
+            activity: this.store.query('activity', {})
         });
     },
     setupController: function(controller, model) {
@@ -40,6 +41,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         controller.set('places', model.places);
         controller.set('categories', model.categories);
         controller.set('weathers', model.weathers);
+        controller.set('postByUser', model.activity.get('meta.total'));
+        controller.set('postToday', model.activity.get('meta.totalToday'));
+
         //controller.set('respondents', model.respondents);
 
         // ---------------------------------------------------------

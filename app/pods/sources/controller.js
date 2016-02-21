@@ -36,6 +36,7 @@ export default Ember.Controller.extend({
     newPlaceLat: 0,
     newPlaceLng: 0,
     newPlaceName: '',
+    isPlaceNameExist: false,
     newSource: null,
     respondentNameCache: '',
     zoom: 16,
@@ -86,6 +87,7 @@ export default Ember.Controller.extend({
         },
         toggleCreateNewMarker: function (place) {
             this.toggleProperty('isShowingModal');
+            this.set('isPlaceNameExist', false);
             this.set('newLat', place.get('lat'));
             this.set('newLng', place.get('lng'));
         },
@@ -93,9 +95,10 @@ export default Ember.Controller.extend({
             this.toggleProperty('isShowingModal');
             this.set('newLat', place.get('lat'));
             this.set('newLng', place.get('lng'));
+            this.set('isPlaceNameExist', true);
             this.set('newPlaceName', placeName);
-            console.log(placeName);
-            console.log(place.get('lat'));
+            //console.log(placeName);
+            //console.log(place.get('lat'));
         },
         // create new marker
         createNew: function (dataToSave) {
