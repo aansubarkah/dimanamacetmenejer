@@ -5,9 +5,10 @@ import Ember from 'ember';
 var hashids = new Hashids("m4c3tsur4b4y4");
 
 export default Ember.Controller.extend({
-    queryParams: ['page', 'limit','query', 'respondentID'],
+    queryParams: ['page', 'limit', 'lastminutes', 'query', 'respondentID'],
     page: 1,
-    limit: 5,
+    limit: 20,
+    lastminutes: 60,
     query: '',
     respondentID: null,//elshinta
     total: null,
@@ -109,15 +110,18 @@ export default Ember.Controller.extend({
         createNew: function (dataToSave) {
             const store = this.get('store');
             var that = this;
+            var sourceID = dataToSave.sourceID;
 
             var marker = store.createRecord('marker', dataToSave);
 
             this.set('isShowingModal', false);
 
             marker.save().then(function () {
+                var sourceToRemove = store.peekRecord('source', sourceID);
+                sourceToRemove.unloadRecord();
                 // @warn refresh template
                 //that.get('target.router').refresh();
-                that.transitionToRoute('traffic');
+                //that.transitionToRoute('traffic');
                 that.set('isShowingMap', false);
             });
         },

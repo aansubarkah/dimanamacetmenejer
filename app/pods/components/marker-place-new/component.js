@@ -40,6 +40,7 @@ export default Ember.Component.extend({
             var arr_user = JSON.parse(user_id);
 
             var dataToSave = {
+                sourceID: parseInt(this.get('newSource.id')),
                 user_id: parseInt(arr_user['id']),
                 category_id: parseInt(this.get('category_id')),
                 respondent_id: parseInt(this.get('newSource.respondent_id')),
@@ -52,7 +53,7 @@ export default Ember.Component.extend({
                 twitTime: this.get('newSource.twitTime'),
                 lat: this.get('newLat'),
                 lng: this.get('newLng'),
-                info: this.get('newSource.info'),
+                info: this.get('info'),
                 pinned: 0
             };
 

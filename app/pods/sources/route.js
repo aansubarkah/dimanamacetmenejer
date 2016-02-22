@@ -14,15 +14,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         var respondentID = null;
 
         if (Ember.isPresent(params.page)) {
-			query.page = params.page;
-		}
-		if (Ember.isPresent(params.limit)) {
-			query.limit = params.limit;
-		}
-		if (Ember.isPresent(params.respondentID)) {
-			query.respondentID = params.respondentID;
+            query.page = params.page;
+        }
+        if (Ember.isPresent(params.limit)) {
+            query.limit = params.limit;
+        }
+        if (Ember.isPresent(params.lastminutes)) {
+            query.lastminutes = params.lastminutes;
+        }
+        if (Ember.isPresent(params.respondentID)) {
+            query.respondentID = params.respondentID;
             respondentID = params.respondentID;
-		}
+        }
         if (Ember.isPresent(params.query)) {
             query.query = params.query;
         }
@@ -71,43 +74,56 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         controller.set('respondentsOptions', respondentsOptions);
 
         // ---------------------------------------------------------
-		// ------------- create markers to display on maps ---------
-		// ---------------------------------------------------------
-		var placesForDisplay = [];
-		model.places.forEach(function (item) {
+        // ------------- create markers to display on maps ---------
+        // ---------------------------------------------------------
+        var placesForDisplay = [];
+        model.places.forEach(function (item) {
             var that = this;
-			var result = {
-				id: hashids.encode(item.get('id')),
-				lat: item.get('lat'),
-				lng: item.get('lng'),
-				infoWindow: {
-					content: "<p><strong>" + item.get('name') + "</strong></p>",
-					visible: false
-				},
+            var result = {
+                id: hashids.encode(item.get('id')),
+                lat: item.get('lat'),
+                lng: item.get('lng'),
+                infoWindow: {
+                    content: "<p><strong>" + item.get('name') + "</strong></p>",
+                    visible: false
+                },
                 dblclick: function(event, marker, placeName = item.get('name')) {
                     var controller = DimanamacetMiminFrontend.__container__.lookup("controller:sources");
                     var boundSend = controller.send.bind(controller);
                     boundSend('toggleCreateNewMarkerWithPlace', marker, placeName);
                 }
-			};
-			placesForDisplay.push(result);
-		});
-		controller.set('placesForDisplay', placesForDisplay);
+            };
+            placesForDisplay.push(result);
+        });
+        controller.set('placesForDisplay', placesForDisplay);
+
+        var times = [
+            {label: '30 minutes', value: 30},
+            {label: '1 hour', value: 60},
+            {label: '6 hours', value: 360},
+            {label: '12 hours', value: 720},
+            {label: '1 day', value: 1440},
+            {label: '1 week', value: 10080}
+        ];
+        controller.set('times', times);
     },
-	queryParams: {
-		page: {
-			refreshModel: true
-		},
-		limit: {
-			refreshModel: true
-		},
-		respondentID: {
-			refreshModel: true
-		},
+    queryParams: {
+        page: {
+            refreshModel: true
+        },
+        limit: {
+            refreshModel: true
+        },
+        lastminutes: {
+            refreshModel: true
+        },
+        respondentID: {
+            refreshModel: true
+        },
         query: {
             refreshModel: true
         }
-	},
+    },
     actions: {
         didTransition: function() {
             this.controller.set('isShowingMap', false);

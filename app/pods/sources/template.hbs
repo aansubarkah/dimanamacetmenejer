@@ -31,6 +31,13 @@
                     <div class="pull-left">
                         Post(s) today:&nbsp;<strong>{{postToday}}</strong>&nbsp;Total post(s):&nbsp;<strong>{{postByUser}}</strong>
                     </div>
+                    <div class="form-group pull-right">
+                        {{select-picker value=lastminutes
+                        content=times
+                        optionLabelPath="content.label"
+                        optionValuePath="content.value"
+                        nothingSelectedMessage="Tweets about 30 minutes ago"}}
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,7 +68,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th><strong>{{respondentsOptionsSelected}}</strong></th>
+                            <th><strong>{{respondentsOptionsSelected}}</strong>{{format-lastminutes lastminutes}}</th>
                         </tr>
                     </thead>
                     <tbody>
