@@ -31,13 +31,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         }
 
         return Ember.RSVP.hash({
-            respondents: this.store.query('respondent', {displayAllOfficial: null}),
+            //respondents: this.store.query('respondent', {displayAllOfficial: null}),
             respondentSelected: this.store.peekRecord('respondent', respondentID),
             weathers: this.store.findAll('weather'),
             categories: this.store.findAll('category'),
             markers: this.store.findAll('marker'),
             //places: this.store.findAll('place'),
-            places: this.store.query('place', { limit: 10000}),
+            respondents: this.store.query('respondent', { showAll: true}),
+            places: this.store.query('place', { showAll: true}),
             sources: this.store.query('source', query),
             activity: this.store.query('activity', {})
         });
@@ -59,7 +60,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         //controller.set('respondentsOptionsSelected', model.sources.get('twitUserScreenName'));
         var respondentsOptions = [];
         var resNull = {
-            label: 'Respondent',
+            label: 'All Respondent',
             value: null
         };
         respondentsOptions.push(resNull);

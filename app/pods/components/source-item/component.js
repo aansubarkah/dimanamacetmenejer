@@ -20,6 +20,10 @@ export default Ember.Component.extend({
 			var source = this.get('source');
 			this.sendAction('deleteDatum', source);
 		},
+        hide() {
+            var source = this.get('source');
+            this.sendAction('hideDatum', source);
+        },
 		edit(){
 			this.set('isEditing', true);
 		},

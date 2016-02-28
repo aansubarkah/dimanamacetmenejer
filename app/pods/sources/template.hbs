@@ -45,30 +45,32 @@
     <div class="col-md-4">
         <div class="box">
             <div class="box-header">
-                <div class="box-tools">
-                    <div class="input-group">
-                        {{input type="text" classNames="form-control" placeholder="Search Twitter" value=query}}
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="box-body">
-                <div class="box-footer clearfix">
+                <div class="col-md-3 pull-left">
                     <div class="box-tools">
-                        <div class="form-group pull-right">
+                        <div class="form-group pull-left">
                             {{select-picker value=respondentID
                             content=respondentsOptions
                             optionLabelPath="content.label"
                             optionValuePath="content.value"
-                            nothingSelectedMessage=respondentsOptionsSelected}}
+                            nothingSelectedMessage="All Respondents"}}
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="box-body">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th><strong>{{respondentsOptionsSelected}}</strong>{{format-lastminutes lastminutes}}</th>
+                            <th valign="top">#</th>
+                            <th valign="top">
+                                {{#if isRespondentNull}}
+                                <strong>All Respondents</strong>
+                                {{/if}}
+                                {{#unless isRespondentNull}}
+                                <strong>{{respondentsOptionsSelected}}</strong>
+                                {{/unless}}
+                                {{format-lastminutes lastminutes}}
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,6 +78,7 @@
                         {{source-item 
                         editDatum='editDatum'
                         deleteDatum='deleteDatum'
+                        hideDatum='hideDatum'
                         index=index
                         firstRowNumber=firstRowNumber
                         source=source

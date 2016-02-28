@@ -1,13 +1,18 @@
 <td>{{basic-math index "+" firstRowNumber}}</td>
 <td>
-    <span {{action 'addSourceToCache' on='click'}}>
-        <strong>@{{source.twitUserScreenName}}</strong>
-        {{source.info}}&nbsp;
-        <strong>{{format-date source.twitTime}}</strong>
-        &nbsp;({{format-time source.twitTime}}).
-    </span>
+    <p {{action 'addSourceToCache' on='click'}}>
+        <strong>@{{source.twitUserScreenName}}</strong>&nbsp;<strong>({{format-date source.twitTime}})</strong>
+        {{source.info}}&nbsp;<strong>({{format-time source.twitTime}})</strong>.
+    </p>
     {{#if isMediaExist}}
-    {{#hold-button type="rectangle" action="togglePicture" delay=10}}Picture{{/hold-button}}
+    <button type="button" class="btn btn-success" aria-label="Left Align" {{action "togglePicture"}}>
+        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+    </button>
     {{/if}}
-    {{#hold-button type="rectangle" action="remove" delay=10}}Remove{{/hold-button}}
+    <button type="button" class="btn btn-warning" aria-label="Left Align" {{action "hide"}}>
+        <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-danger" aria-label="Left Align" {{action "remove"}}>
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </button>
 </td>

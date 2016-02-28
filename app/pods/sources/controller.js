@@ -40,7 +40,7 @@ export default Ember.Controller.extend({
     isPlaceNameExist: false,
     newSource: null,
     respondentNameCache: '',
-    respondentsOptionsSelected: 'Respondents',
+    respondentsOptionsSelected: 'All Respondents',
     zoom: 16,
     pictureURL: '',
     isAddRowVisible: false,
@@ -48,6 +48,9 @@ export default Ember.Controller.extend({
     isShowingMap: false,
     isShowingModalPicture: false,
     triggerSuggestions: 1,
+    isRespondentNull: function() {
+        return this.get('respondentID') == null;
+    }.property('respondentID'),
     init: function () {
         var that = this;
         this.get('geolocation').getLocation().then(function () {
@@ -136,6 +139,13 @@ export default Ember.Controller.extend({
             place.save();
             // refresh template
             this.transitionToRoute('soures');
+        },
+        hideDatum: function (source) {
+            source.unloadRecord();
+//var sourceToRemove = store.peekRecord('source', sourceID);
+                //sourceToRemove.unloadRecord();
+//source.destroyRecord();
+
         },
         itemSelected: function (item) {
             //console.log(item.get('id'));
