@@ -38,6 +38,7 @@ export default Ember.Controller.extend({
     newPlaceLng: 0,
     newPlaceName: '',
     isPlaceNameExist: false,
+    spotId: 0,
     newSource: null,
     respondentNameCache: '',
     respondentsOptionsSelected: 'All Respondents',
@@ -142,10 +143,6 @@ export default Ember.Controller.extend({
         },
         hideDatum: function (source) {
             source.unloadRecord();
-//var sourceToRemove = store.peekRecord('source', sourceID);
-                //sourceToRemove.unloadRecord();
-//source.destroyRecord();
-
         },
         itemSelected: function (item) {
             //console.log(item.get('id'));
@@ -171,6 +168,11 @@ export default Ember.Controller.extend({
         refreshPlace(lat, lng){
             this.set('lat', lat);
             this.set('lng', lng);
+        },
+        changeMapBasedOnPlace() {
+            var place = this.store.peekRecord('place', this.get('spotId'));
+            this.set('lat', place.get('lat'));
+            this.set('lng', place.get('lng'));
         },
         addSourceToCache: function(source) {
             this.toggleProperty('isShowingMap');

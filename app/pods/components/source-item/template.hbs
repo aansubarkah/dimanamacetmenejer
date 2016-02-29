@@ -5,14 +5,14 @@
         {{source.info}}&nbsp;<strong>({{format-time source.twitTime}})</strong>.
     </p>
     {{#if isMediaExist}}
-    <button type="button" class="btn btn-success" aria-label="Left Align" {{action "togglePicture"}}>
+    <button type="button" class="btn btn-success" aria-label="Left Align" title="Picture" {{action "togglePicture"}}>
         <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
     </button>
     {{/if}}
-    <button type="button" class="btn btn-warning" aria-label="Left Align" {{action "hide"}}>
+    <button type="button" class="btn btn-warning" aria-label="Left Align" title="Hide" {{action "hide"}}>
         <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
     </button>
-    <button type="button" class="btn btn-danger" aria-label="Left Align" {{action "remove"}}>
+    <button type="button" class="btn btn-danger" aria-label="Left Align" title="Remove" {{action "remove"}}>
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
     </button>
 </td>

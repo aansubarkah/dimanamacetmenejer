@@ -52,6 +52,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
         controller.set('weathers', model.weathers);
         controller.set('postByUser', model.activity.get('meta.total'));
         controller.set('postToday', model.activity.get('meta.totalToday'));
+        //controller.set('spots', model.places);
 
         if (model.respondentSelected !== null) {
             controller.set('respondentsOptionsSelected', model.respondentSelected.get('name'));
@@ -107,6 +108,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             {label: '1 week', value: 10080}
         ];
         controller.set('times', times);
+
+        var placesOptions = [];
+        model.places.forEach(function (item) {
+            var result = {
+                label: item.get('name'),
+                value: item.get('id')
+            };
+            placesOptions.push(result);
+        });
+        controller.set('placesOptions', placesOptions);
+
     },
     queryParams: {
         page: {
