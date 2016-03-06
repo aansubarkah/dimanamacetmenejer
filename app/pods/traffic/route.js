@@ -33,7 +33,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 		return Ember.RSVP.hash({
 			markerview: this.store.query('markerview', query),
-			place: this.store.findAll('place'),
+			place: this.store.query('place', {showAll: true}),
 			marker: this.store.findAll('marker'),
 			category: this.store.findAll('category'),
 			weather: this.store.findAll('weather'),
@@ -58,10 +58,32 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		controller.set('weather', model.weather);
 		controller.set('respondent', model.respondent);
 
-		// ---------------------------------------------------------
+		var markersForDisplay = [];
+        // ---------------------------------------------------------
+        // ------------- create markers to display on maps ---------
+        // ---------------------------------------------------------
+        model.place.forEach(function (item) {
+            var that = this;
+            var result = {
+                id: hashids.encode(item.get('id')),
+                lat: item.get('lat'),
+                lng: item.get('lng'),
+                infoWindow: {
+                    content: "<p><strong>" + item.get('name') + "</strong></p>",
+                    visible: false
+                },
+                dblclick: function(event, marker, placeName = item.get('name')) {
+                    var controller = DimanamacetMiminFrontend.__container__.lookup("controller:traffic");
+                    var boundSend = controller.send.bind(controller);
+                    boundSend('toggleCreateNewMarkerWithPlace', marker, placeName);
+                }
+            };
+            markersForDisplay.push(result);
+        });
+
+        // ---------------------------------------------------------
 		// ------------- create markers to display on maps ---------
 		// ---------------------------------------------------------
-		var markersForDisplay = [];
 		model.markerview.forEach(function (item) {
 			var isPinned = "Tidak";
 			var isCleared = "Belum";
@@ -92,7 +114,17 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			};
 			markersForDisplay.push(result);
 		});
-		controller.set('markersForDisplay', markersForDisplay);
+        controller.set('markersForDisplay', markersForDisplay);
+
+        var placesOptions = [];
+        model.place.forEach(function (item) {
+            var result = {
+                label: item.get('name'),
+                value: item.get('id')
+            };
+            placesOptions.push(result);
+        });
+        controller.set('placesOptions', placesOptions);
 	},
 	queryParams: {
 		page: {

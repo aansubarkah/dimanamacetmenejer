@@ -15,22 +15,23 @@ export default Ember.Component.extend({
         this.set('respondent_id', 11);// Suara Surabaya
         this.set('weather_id', 1);
         this.set('info', '');
+        this.set('placeName', '');
         this.set('newPinned', false);
         this.set('selection', null);
     },
     actions: {
         toggleAddModal(){
             this.toggleProperty('isShowingModal');
-            //console.log(this.get('category_id'));
-            //console.log(this.get('category'));
+            this.set('isPlaceNameExist', false);
+            this.set('placeName', '');
         },
         toggleAlert(){
             this.toggleProperty('isAlert');
         },
         createNew(){
-            if (this.get('info') === '') {
+            if (this.get('placeName') === '') {
                 this.set('isAlert', true);
-                this.set('alertMessages', 'Marker Info is blank!');
+                this.set('alertMessages', 'Place name is blank!');
                 return;
             }
 
@@ -44,10 +45,10 @@ export default Ember.Component.extend({
             var user_id = decodeURIComponent(escape(window.atob(arr_token[1])));
             var arr_user = JSON.parse(user_id);
 
-            var pinned = 0;
-            if (this.get('newPinned')) {
-                pinned = 1;
-            }
+            //var pinned = 0;
+            //if (this.get('newPinned')) {
+                //pinned = 1;
+            //}
 
             var dataToSave = {
                 user_id: parseInt(arr_user['id']),
@@ -56,10 +57,11 @@ export default Ember.Component.extend({
                 respondentName: this.get('newRespondentName'),
                 respondentContact: this.get('newRespondentContact'),
                 weather_id: parseInt(this.get('weather_id')),
+                twitPlaceName: this.get('placeName'),
                 lat: this.get('newLat'),
                 lng: this.get('newLng'),
                 info: this.get('info'),
-                pinned: pinned
+                pinned: 0
             };
 
             this.set('newRespondentName', '');

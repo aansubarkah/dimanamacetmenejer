@@ -30,6 +30,12 @@ container-class="modal-dialog"}}
     {{/if}}
 </div>
 <div class="modal-body">
+    {{#if isPlaceNameExist}}
+    <div class="form-group">
+        Place: <strong>{{placeName}}</strong>
+    </div>
+    {{/if}}
+
     <div class="form-group">
         {{select-dropdown data=category selectedValue=category_id defaultText='Condition: Macet'}}
     </div>
@@ -39,6 +45,18 @@ container-class="modal-dialog"}}
     <div class="form-group">
         {{select-dropdown data=respondent selectedValue=respondent_id defaultText='Respondent: Suara Surabaya (SS)'}}
     </div>
+    
+    {{#unless isPlaceNameExist}}
+    <div class="form-group">
+        {{input
+        class="form-control"
+        placeholder="Place name"
+        value=placeName
+        enter="createNew"
+        }}
+    </div>
+    {{/unless}}
+
     <div class="form-group">
         {{textarea
         class='form-control'

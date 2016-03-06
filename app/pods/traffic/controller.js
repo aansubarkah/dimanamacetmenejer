@@ -29,7 +29,6 @@ export default Ember.Controller.extend({
 		} else {
 			number = this.limit * this.page;
 		}
-
 		return number;
 	}.property('page', 'total', 'limit'),
 	geolocation: Ember.inject.service(),
@@ -41,6 +40,9 @@ export default Ember.Controller.extend({
 	newPlaceLat: 0,
 	newPlaceLng: 0,
 	newPlaceName: '',
+    isPlaceNameExist: false,
+    newSearch: '',
+    spotId: 0,
 	zoom: 16,
 	isAddRowVisible: false,
 	isShowingModal: false,
@@ -100,6 +102,13 @@ export default Ember.Controller.extend({
 			this.set('newLat', place.get('lat'));
 			this.set('newLng', place.get('lng'));
 		},
+        toggleCreateNewMarkerWithPlace: function(place, placeName) {
+            this.toggleProperty('isShowingModal');
+            this.set('newLat', place.get('lat'));
+            this.set('newLng', place.get('lng'));
+            this.set('isPlaceNameExist', true);
+            this.set('newPlaceName', placeName);
+        },
 		// create new marker
 		createNew: function (dataToSave) {
 			const store = this.get('store');
@@ -113,6 +122,8 @@ export default Ember.Controller.extend({
 			marker.save().then(function () {
 				// @warn refresh template
 				that.get('target.router').refresh();
+                that.set('isPlaceNameExist', false);
+                that.set('newPlaceName', '');
 				//that.transitionToRoute('traffic');
 			});
 		},
@@ -152,6 +163,16 @@ export default Ember.Controller.extend({
 		refreshPlace(lat, lng){
 			this.set('lat', lat);
 			this.set('lng', lng);
-		}
+		},
+        searchInfo: function() {
+            this.set('query', this.get('newSearch'));
+            this.set('page', 1);
+        },
+        changeMapBasedOnPlace() {
+            var place = this.store.peekRecord('place', this.get('spotId'));
+            this.set('lat', place.get('lat'));
+            this.set('lng', place.get('lng'));
+        },
+
 	}
 });

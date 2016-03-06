@@ -38,6 +38,7 @@ export default Ember.Controller.extend({
 	newPlaceLat: 0,
 	newPlaceLng: 0,
 	newPlaceName: '',
+    newSearch: '',
 	zoom: 16,
 	isAddRowVisible: false,
 	isShowingModal: false,
@@ -235,6 +236,10 @@ export default Ember.Controller.extend({
 				triggerSuggestions = triggerSuggestions + 1;
 				self.set('triggerSuggestions', triggerSuggestions);
 			});
-		}
+		},
+        searchPlace: function() {
+            this.set('query', this.get('newSearch'));
+            this.set('page', 1);
+        }
 	}
 });
