@@ -37,10 +37,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
             categories: this.store.findAll('category'),
             markers: this.store.findAll('marker'),
             //places: this.store.findAll('place'),
-            respondents: this.store.query('respondent', { showAll: true}),
-            places: this.store.query('place', { showAll: true}),
+            respondents: this.store.query('respondent', {showAll: true}),
+            places: this.store.query('place', {showAll: true}),
             sources: this.store.query('source', query),
-            activity: this.store.query('activity', {})
+            activity: this.store.query('activity', {today: true})
         });
     },
     setupController: function(controller, model) {
