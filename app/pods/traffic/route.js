@@ -38,7 +38,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 			category: this.store.findAll('category'),
 			weather: this.store.findAll('weather'),
 			respondent: this.store.findAll('respondent'),
-            activity: this.store.query('activity', {})
+            activity: this.store.query('activity', {today: true})
 		});
 	},
 	setupController: function (controller, model) {
@@ -85,16 +85,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 		// ------------- create markers to display on maps ---------
 		// ---------------------------------------------------------
 		model.markerview.forEach(function (item) {
-			var isPinned = "Tidak";
-			var isCleared = "Belum";
-
-			if (item.get('pinned')) {
-				isPinned = "Ya";
-			}
-
-			if (item.get('cleared')) {
-				isCleared = "Ya";
-			}
+            var info = '';
+            if(item.get('info')) {
+                info = '<p><strong>Keterangan:&nbsp;</strong>' + item.get('info') + '</p>';
+            }
 
 			var result = {
 				id: hashids.encode(item.get('id')),
@@ -105,10 +99,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 				infoWindow: {
 					content: "<p><strong>Waktu:&nbsp;</strong>" + moment(item.get('created')).fromNow() + "</p>" +
 					"<p>(" + moment(item.get('created')).format('dddd, Do MMMM YYYY, h:mm:ss A') + ")</p>" +
-					"<p><strong>Keterangan:&nbsp;</strong>" +
-					item.get('info') + "</p><p><strong>Cuaca:&nbsp</strong>" + item.get('weather_name') + "</p>" +
-					"<p><strong>Permanen:&nbsp;</strong>" + isPinned + "</p><p><strong>Selesai:&nbsp;</strong>" +
-					isCleared + "</p>",
+					"<p><strong>Cuaca:&nbsp</strong>" + item.get('weather_name') + "</p>" +
+                    info,
 					visible: false
 				}
 			};
