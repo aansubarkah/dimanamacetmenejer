@@ -5,6 +5,7 @@ moment.locale('id');
 
 export default Ember.Component.extend({
 	tagName: 'tr',
+    formatedTime: '',
 	init() {
 		this._super(...arguments);
 		this.set('isEditing', false);
@@ -14,7 +15,26 @@ export default Ember.Component.extend({
         if (this.get('source.media') !== null) {
             this.set('isMediaExist', true);
         }
-	},
+
+        // update time displayed
+        this.updateTime();
+    },
+    updateTime: function() {
+        let that = this;
+        let interval = 60000 * 5;//1 minutes * 5
+
+        // time left from created updated every 5 minutes
+        // 1st create string from date with moment.js
+        let itemCreatedAt = '';
+        itemCreatedAt = moment(that.get('source.twitTime')).fromNow();
+        that.set('formatedTime', itemCreatedAt);
+
+        Ember.run.later(function() {
+            itemCreatedAt = moment(that.get('source.twitTime')).fromNow();
+            that.set('formatedTime', itemCreatedAt);
+            that.updateTime();
+        }, interval);
+    },
 	actions: {
 		remove(){
 			var source = this.get('source');

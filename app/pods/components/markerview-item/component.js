@@ -5,15 +5,31 @@ moment.locale('id');
 
 export default Ember.Component.extend({
 	tagName: 'tr',
+    formatedTime: '',
 	init() {
 		this._super(...arguments);
 		this.set('isEditing', false);
 		this.set('isShowingModal', false);
-		//if(this.get('markerview.place_name').trim()===''){
-		//	this.set('markerview.place_name', 'belum diberinama');
-		//}
-	},
 
+        // refresh time displayed
+        this.updateTime();
+    },
+    updateTime: function() {
+        let that = this;
+        let interval = 60000 * 5;//1 minutes * 5
+
+        // time left from created updated every 5 minutes
+        // 1st create string from date with moment.js
+        let itemCreatedAt = '';
+        itemCreatedAt = moment(that.get('markerview.created')).fromNow();
+        that.set('formatedTime', itemCreatedAt);
+
+        Ember.run.later(function() {
+            itemCreatedAt = moment(that.get('markerview.created')).fromNow();
+            that.set('formatedTime', itemCreatedAt);
+            that.updateTime();
+        }, interval);
+    },
 	actions: {
 		remove(){
 			var markerview = this.get('markerview');

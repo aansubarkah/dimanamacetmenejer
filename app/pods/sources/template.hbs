@@ -52,11 +52,6 @@
                         Post(s) today:&nbsp;<strong>{{postToday}}</strong>&nbsp;Total post(s):&nbsp;<strong>{{postByUser}}</strong>
                     </div>
                     <div class="form-group pull-right">
-                        {{select-picker value=lastminutes
-                        content=times
-                        optionLabelPath="content.label"
-                        optionValuePath="content.value"
-                        nothingSelectedMessage="Tweets about 30 minutes ago"}}
                     </div>
                 </div>
             </div>
@@ -81,7 +76,6 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th valign="top">#</th>
                             <th valign="top">
                                 {{#if isRespondentNull}}
                                 <strong>All Respondents</strong>
@@ -89,17 +83,15 @@
                                 {{#unless isRespondentNull}}
                                 <strong>{{respondentsOptionsSelected}}</strong>
                                 {{/unless}}
-                                {{format-lastminutes lastminutes}}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{#each sources as |source index|}}
-                        {{source-item 
+                        {{#each sources as |source|}}
+                        {{source-item
                         editDatum='editDatum'
                         deleteDatum='deleteDatum'
                         hideDatum='hideDatum'
-                        index=index
                         firstRowNumber=firstRowNumber
                         source=source
                         addSourceToCache='addSourceToCache'
@@ -107,16 +99,17 @@
                         togglePicture='togglePicture'
                         }}
                         {{/each}}
+                        {{load-more-button action='infinityLoad' infinityModel=sources}}
                     </tbody>
                 </table>
             </div>
-            <div class="box-footer clearfix">
+            <!--<div class="box-footer clearfix">
                 <p class="pull-left">Displaying row {{firstRowNumber}} to {{lastRowNumber}} from {{total}} rows</p>
 
                 <div class="box-tools">
                     {{pagination-pager count=totalPages current=page}}
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 </div>

@@ -5,14 +5,15 @@ import Ember from 'ember';
 var hashids = new Hashids("m4c3tsur4b4y4");
 
 export default Ember.Controller.extend({
-    queryParams: ['page', 'limit', 'lastminutes', 'query', 'respondentID'],
-    page: 1,
-    limit: 20,
-    lastminutes: 60,
-    query: '',
+    //queryParams: ['page', 'limit', 'lastminutes', 'query', 'respondentID'],
+    queryParams: ['respondentID'],
+    //page: 1,
+    //limit: 20,
+    //lastminutes: 60,
+    //query: '',
     respondentID: null,//elshinta
     total: null,
-    totalPages: function() {
+    /*totalPages: function() {
         return Math.ceil(this.get('total') / this.limit);
     }.property('total'),
     firstRowNumber: function () {
@@ -27,7 +28,7 @@ export default Ember.Controller.extend({
         }
 
         return number;
-    }.property('page', 'total', 'limit'),
+    }.property('page', 'total', 'limit'),*/
     geolocation: Ember.inject.service(),
     userLocation: null,
     lat: -7.290293,
@@ -131,6 +132,9 @@ export default Ember.Controller.extend({
         },
         deleteDatum: function (source) {
             var that = this;
+            let sources = this.get('sources');
+            sources.removeObject(source);
+
             source.destroyRecord().then(function () {
                 // refresh template
                 that.transitionToRoute('sources');
@@ -142,7 +146,9 @@ export default Ember.Controller.extend({
             this.transitionToRoute('soures');
         },
         hideDatum: function (source) {
+            let sources = this.get('sources');
             source.unloadRecord();
+            sources.removeObject(source);
         },
         itemSelected: function (item) {
             //console.log(item.get('id'));

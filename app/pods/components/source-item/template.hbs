@@ -1,9 +1,11 @@
-<td>{{basic-math index "+" firstRowNumber}}</td>
 <td>
-    <p {{action 'addSourceToCache' on='click'}}>
-        <strong>@{{source.twitUserScreenName}}</strong>&nbsp;<strong>({{format-date source.twitTime}})</strong>
-        {{source.info}}&nbsp;<strong>({{format-time source.twitTime}})</strong>.
-    </p>
+    <div {{action 'addSourceToCache' on='click'}}>
+        <p>
+        <strong>@{{source.twitUserScreenName}}</strong>&nbsp;<strong style="color: #777777; font-size: 80%">{{formatedTime}}</strong>
+        </p>
+        <p>{{source.info}}</p>
+        <p style="color: #777777; font-weight: bold;">{{format-time source.twitTime}}</p>
+    </div>
     {{#if isMediaExist}}
     <button type="button" class="btn btn-success" aria-label="Left Align" title="Picture" {{action "togglePicture"}}>
         <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>

@@ -1,4 +1,3 @@
-<td>{{basic-math index "+" firstRowNumber}}</td>
 <td>
     <span {{action 'refreshPlace' on='click'}}>
         <strong>{{markerview.category_name}}</strong>&nbsp;
@@ -6,7 +5,7 @@
         di&nbsp;{{markerview.place_name}}&nbsp;
         {{/if}}
         {{markerview.info}}&nbsp;&nbsp;
-        <strong>{{format-date markerview.created}}</strong>
+        <strong style="color: #777777;">{{formatedTime}}</strong>
         &nbsp;({{format-time markerview.created}}).
         <strong>{{markerview.respondent_name}}</strong>&nbsp;&#45;&nbsp;
         <strong>{{markerview.respondent_contact}}</strong>.
