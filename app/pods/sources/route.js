@@ -60,9 +60,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, InfinityRoute, {
         });
     },
     setupController: function(controller, model) {
+        controller.set('isNewStream', false);
+        controller.set('newStreamTotal', 0);
         controller.set('total', model.sources.get('meta.total'));
-        controller.set('maxId', model.sources.get('meta.maxId'));
-        controller.set('minId', model.sources.get('meta.minId'));
         controller.set('sources', model.sources);
         controller.set('markers', model.markers);
         controller.set('places', model.places);
@@ -162,8 +162,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, InfinityRoute, {
             this.set('_minId', undefined);
             this.set('_maxId', undefined);
             this.set('_firstLoad', true);
-            this._super(transition);
-            this.get('poll').removePoll('sources');
+            //this._super(transition);
+            //this.get('poll').removePoll('sources');
         }
     },
     afterInfinityModel(sources) {
@@ -178,7 +178,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, InfinityRoute, {
             this.set('_firstLoad', false);
         }
     },
-    newSource: function() {
+    getNewStream: function() {
         let query = {
             newer: true,
             max_id: this.get('_maxId')
@@ -189,30 +189,33 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, InfinityRoute, {
         });
     },
     onPoll: function() {
-        this.newSource().then((datum) =>  {
+        this.getNewStream().then((datum) =>  {
             //let latestId = datum.sources.get('firstObject.id');
             let latestId = datum.sources.get('meta.maxId');
             if(latestId > 0) {
+                this.controller.set('isNewStream', true);
+                this.controller.set('newStreamTotal', datum.sources.get('meta.total'));
+                this.controller.set('newStream', datum.sources);
                 this.set('_maxId', latestId);
-                let oldSources = this.controller.get('sources');
+                /*let oldSources = this.controller.get('sources');
                 datum.sources.forEach(function(item){
                     oldSources.addObject(item);
                 });
-                this.controller.set('sources', oldSources);
+                this.controller.set('sources', oldSources);*/
             }
         });
     },
     afterModel: function() {
-        let sourcesPoller = this.get('sourcesPoller');
+        /*let sourcesPoller = this.get('sourcesPoller');
         if (!sourcesPoller) {
             sourcesPoller = this.get('pollboy').add(this, this.onPoll, pollInterval);
             this.set('sourcesPoller', sourcesPoller);
-        }
+        }*/
     },
-    deactivate: function() {
+    /*deactivate: function() {
         const sourcesPoller = this.get('sourcesPoller');
         this.get('pollboy').remove(sourcesPoller);
-    },
+    },*/
     updateSource: function(model) {
         let that = this;
         let interval = 60000 * 0.5;// 1 minutes * 5

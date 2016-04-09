@@ -85,6 +85,13 @@
                                 {{/unless}}
                             </th>
                         </tr>
+                        {{#if isNewStream}}
+                        <tr>
+                            <th valign="top">
+                                <a {{action "showNewStream"}}>View {{newStreamTotal}} new data</a>
+                            </th>
+                        </tr>
+                        {{/if}}
                     </thead>
                     <tbody>
                         {{#each sources as |source|}}

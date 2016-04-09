@@ -8,7 +8,7 @@ module.exports = function (defaults) {
 			enabled: true
 		},
 		minifyJS: {
-			enabled: false
+			enabled: true
 		},
 		sourcemaps: {
 			enabled: false,

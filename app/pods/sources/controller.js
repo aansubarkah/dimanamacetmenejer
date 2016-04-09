@@ -116,6 +116,7 @@ export default Ember.Controller.extend({
             const store = this.get('store');
             var that = this;
             var sourceID = dataToSave.sourceID;
+            let sources = this.get('sources');
 
             var marker = store.createRecord('marker', dataToSave);
 
@@ -123,10 +124,12 @@ export default Ember.Controller.extend({
 
             marker.save().then(function () {
                 var sourceToRemove = store.peekRecord('source', sourceID);
-                sourceToRemove.unloadRecord();
-                // @warn refresh template
-                //that.get('target.router').refresh();
-                //that.transitionToRoute('traffic');
+                if(sourceToRemove) {
+                    sourceToRemove.set('respondent', null);
+                    sourceToRemove.set('region', null);
+                    store.unloadRecord(sourceToRemove);
+                    sources.removeObject(sourceToRemove);
+                }
                 that.set('isShowingMap', false);
             });
         },
@@ -184,6 +187,19 @@ export default Ember.Controller.extend({
             this.toggleProperty('isShowingMap');
             this.set('newSource', source);
             this.set('respondentNameCache', source.get('twitUserScreenName'));
+        },
+        showNewStream() {
+            this.set('isNewStream', false);
+            //let oldSources = this.get('sources');
+            //let newStream = this.get('newStream');
+            //newStream.forEach(function(item){
+                //oldSources.addObject(item);
+                //oldSources.pushObject(item);
+            //});
+            //this.set('sources', oldSources);
+            //this.get('target.router').refresh();
+            //that.transitionToRoute('traffic');
+
         }
     }
 });
